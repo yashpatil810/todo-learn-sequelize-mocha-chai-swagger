@@ -1,0 +1,280 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Todo API - Yapsody",
+		"description": "Todo by yashpatil810@gmail.com"
+	},
+	"schemes": [
+		"http",
+		"https"
+	],
+	"host": "localhost:5001",
+    "basePath": "/api",
+    "tags":[
+        {
+            "name": "Todo",
+            "description": "Todo APIs"
+        }
+    ],
+	"paths": {
+        "/get-todo-list": {
+			"get": {
+                "tags":[
+                    "Todo"
+                ],
+				"summary": "Get todo list",
+				"description": "Returns todo list",
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "not found"
+					}
+				}
+			}
+		},
+		"/add-todo": {
+			"post": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "Add Todo",
+				"description": "Adds Todo to the todo list",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+                        "description": "Created todo object",
+                        "required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"name": {
+                                    "type": "string"
+								},
+								"body": {
+									"type": "string"
+                                }
+							}
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+        },
+        "/edit-todo-name": {
+			"put": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "Edit Todo Name",
+				"description": "Edits todo name",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+                        "description": "Updated todo object",
+						"schema": {
+							"type": "object",
+							"properties": {
+                                "todoid": {
+                                    "type": "integer",
+                                    "required": true
+								},
+								"name": {
+                                    "type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+        },
+        
+        "/edit-todo-body": {
+			"put": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "Edit Todo Body",
+				"description": "Edits todo body",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+                        "description": "Updated todo object",
+						"schema": {
+							"type": "object",
+							"properties": {
+                                "todoid": {
+                                    "type": "integer",
+                                    "required": true
+								},
+								"body": {
+                                    "type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+        },
+        
+        "/delete-todo/{todoid}": {
+			"delete": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Delete todo",
+                "description": "Deletes todo",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "todoid",
+                        "in": "path",
+                        "description": "The todoid that needs to be deleted",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "default": {
+						"description": "successful operation"
+					}
+                }
+            }
+        },
+        
+        "/mark-todo": {
+			"put": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "Mark todo status",
+				"description": "Marks todo status as completed true or false",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+                        "description": "Updated todo object",
+						"schema": {
+							"type": "object",
+							"properties": {
+                                "todoid": {
+                                    "type": "integer",
+                                    "required": true
+								},
+								"done": {
+                                    "type": "boolean",
+                                    "required": true
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+        },
+
+        "/get-todo-pagination": {
+			"post": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "GET TODO PAGINATION",
+				"description": "Gets Todo in pagination",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+                        "description": "Created todo object",
+                        "required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"page_no": {
+                                    "type": "integer"
+								},
+								"rows": {
+									"type": "integer"
+                                }
+							}
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+        },
+        
+        "/get-todo-search/{page_no}/{rows}/{keyword}": {
+			"get": {
+                "tags": [
+                    "Todo"
+                ],
+				"summary": "GET TODO PAGINATION",
+				"description": "Gets Todo in pagination",
+				"parameters": [
+					{
+						"in": "path",
+                        "name": "keyword",
+                        "description": "Todo keyword",
+                        "required": true,
+						"schema": {
+							"type": "string"
+						}
+                    },
+                    {
+						"in": "path",
+                        "name": "page_no",
+                        "description": "Page Number",
+                        "required": true,
+						"schema": {
+							"type": "integer"
+						}
+                    },
+                    {
+						"in": "path",
+                        "name": "rows",
+                        "description": "Rows per page",
+                        "required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "successful operation"
+					}
+				}
+			}
+		}
+	}
+}
